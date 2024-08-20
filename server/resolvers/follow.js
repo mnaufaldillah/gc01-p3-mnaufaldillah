@@ -14,7 +14,16 @@ const resolvers = {
             }
 
             if(follow.followingId === verifiedUser._id.toString()) {
-                throw new Error(`Can't follow yours own account`)
+                throw new Error(`Can't follow yours own account`);
+            }
+
+            const foundFollow = await db.collection(`Follows`).findOne({
+                followwingId: new ObjectId(follow.followingId),
+                followerId: verifiedUser._id
+            });
+
+            if(foundFollow) {
+                throw new Error(`You already follow the account`);
             }
 
             const newFollow = {
