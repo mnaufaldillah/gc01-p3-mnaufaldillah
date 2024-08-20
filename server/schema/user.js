@@ -8,7 +8,7 @@ const typeDefs = `#graphql
 
     type Query {
         searchUser(inputSearch: String): [User]
-        getUser(inputSearch: String): User
+        getUser(id: ID): User
     }
 
     input NewRegister {
