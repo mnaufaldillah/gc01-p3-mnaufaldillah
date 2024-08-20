@@ -9,6 +9,7 @@ const typeDefs = `#graphql
         likes: [Like]
         createdAt: String
         updatedAt: String
+        author: User
     }
 
     type Comment {
@@ -27,23 +28,29 @@ const typeDefs = `#graphql
 
     type Query {
         getPosts: [Post]
+        getPostById(postId: ID): Post
     }
 
     input NewPost {
-        content: String
+        content: String!
         tags: [String]
         imgUrl: String
     }
 
     input NewComment {
         content: String
+        postId: ID
+    }
+
+    input NewLike {
+        postId: ID
     }
 
 
     type Mutation {
         addPost(post: NewPost): Post
-        commentPost(comment: NewComment): Post
-        likePost: Post
+        commentPost(comment: NewComment): Comment
+        likePost(like: NewLike): Like
     }
 `
 
