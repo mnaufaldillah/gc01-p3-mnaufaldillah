@@ -4,11 +4,17 @@ const typeDefs = `#graphql
         name: String
         username: String
         email: String
+        followings: [User]
+        followers: [User]
+    }
+
+    type AccessToken {
+        access_token: String
     }
 
     type Query {
         searchUser(inputSearch: String): [User]
-        getUser(id: ID): User
+        getUser(userId: ID): User
     }
 
     input NewRegister {
@@ -25,7 +31,7 @@ const typeDefs = `#graphql
 
     type Mutation {
         registerUser(register: NewRegister): User
-        loginUser(login: NewLogin): User
+        loginUser(login: NewLogin): AccessToken
     }
 `;
 

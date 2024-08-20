@@ -9,10 +9,17 @@ const { connect, getDB } = require(`./config/mongoConnection.js`);
 
 const userResolvers = require(`./resolvers/user.js`);
 const userTypeDefs = require(`./schema/user.js`);
+const authentication = require("./middlewares/authentication.js");
+
+const postResolvers = require(`./resolvers/post.js`);
+const postTypeDefs = require(`./schema/post.js`);
+
+const followResolvers = require(`./resolvers/follow.js`);
+const followTypeDefs = require(`./schema/follow.js`);
 
 const server = new ApolloServer({
-    typeDefs: [userTypeDefs],
-    resolvers: [userResolvers]
+    typeDefs: [userTypeDefs, postTypeDefs, followTypeDefs],
+    resolvers: [userResolvers, postResolvers, followResolvers]
 });
 
 (async () => {
@@ -25,7 +32,8 @@ const server = new ApolloServer({
             listen: { port: process.env.PORT || 4000},
             context: ({req, res}) => {
                 return {
-                    db
+                    db,
+                    authentication: () => authentication(req, db)
                 }
             }
         });
