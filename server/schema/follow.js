@@ -12,7 +12,7 @@ const typeDefs = `#graphql
     }
 
     type Mutation {
-        followUser{follow: NewFollow}: Follow
+        followUser(follow: NewFollow): Follow
     }
 `
 
