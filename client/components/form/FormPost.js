@@ -1,18 +1,16 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormPost({ postDetail }) {
+export default function FormPost() {
     const [newPost, setNewPost]  = useState({
         content: '',
-        imageUrl: '',
+        imgUrl: '',
         tag: ''
     });
 
     async function handlerAddPost() {
         try {
             setNewPost({...newPost, tag: newPost.tag.split(' ')});
-
-
             console.log(newPost);
         } catch (error) {
             console.log(error);
@@ -22,35 +20,32 @@ export default function FormPost({ postDetail }) {
 
     return (
         <View>
-            <Text style={styles.title}>Register User</Text>
+            <Text style={styles.title}>Add New Post</Text>
 
             <TextInput 
-                style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, name: text})}
-                value={registerUser.name}
-                placeholder="Full name"
+                style={styles.inputPost}
+                multiline={true}
+                onChangeText={( text ) => setNewPost({...newPost, content: text})}
+                value={newPost.name}
+                placeholder="Your Thoughts?"
             />
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, username: text})}
-                value={registerUser.username}
-                placeholder="Username"
+                onChangeText={( text ) => setNewPost({...newPost, imgUrl: text})}
+                value={newPost.imgUrl}
+                placeholder="Image maybe?"
             />
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, email: text})}
-                value={registerUser.email}
-                placeholder="Email"
+                onChangeText={( text ) => setNewPost({...newPost, tag: text})}
+                value={newPost.tag}
+                placeholder="Tag maybe?"
             />
 
-            <TouchableOpacity style={styles.button} onPress={handleRegister}>
+            <TouchableOpacity style={styles.button} onPress={handlerAddPost}>
                 <Text style={styles.buttonText}>Register</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
         </View>
     )
@@ -64,12 +59,20 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 300,
+        width: "100%",
+        borderWidth: 1,
+        marginBottom: 16,
+        padding: 0
+    },
+    inputPost: {
+        height: 80,
+        width: "100%",
         borderWidth: 1,
         marginBottom: 16,
         padding: 0
     },
     button: {
+        width: "50%",
         backgroundColor: "blue",
         padding: 10,
         borderRadius: 5,

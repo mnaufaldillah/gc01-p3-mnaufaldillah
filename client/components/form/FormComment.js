@@ -20,7 +20,7 @@ export default function FormComment() {
                 style={styles.input}
                 onChangeText={( text ) => setComment(text)}
                 value={comment}
-                placeholder="Email"
+                placeholder="Your Comment"
             />
 
             <TouchableOpacity style={styles.button} onPress={handleComment}>
@@ -31,20 +31,16 @@ export default function FormComment() {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 24,
-        marginBottom: 16,
-        textAlign: "center"
-    },
     input: {
-        height: 80,
-        width: 300,
+        height: 40,
+        width: "100%",
         borderWidth: 1,
         marginBottom: 16,
-        padding: 0
+        padding: 0,
+        justifyContent:"center",
     },
     button: {
-        backgroundColor: "blue",
+        backgroundColor: "skyblue",
         padding: 10,
         borderRadius: 5,
         marginBottom: 16
