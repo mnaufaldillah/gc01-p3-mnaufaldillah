@@ -1,9 +1,73 @@
-import { Text, View } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { useState } from "react";
 
-export default function FormRegister() {
+export default function FormLogin() {
+    const [loginUser, setLoginUser]  = useState({
+        email: '',
+        password: ''
+    });
+
+    async function handleLogin() {
+        try {
+            console.log(loginUser);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <View>
-            <Text>Form Login</Text>
+            <Text style={styles.title}>Welcome to FOS</Text>
+
+            <TextInput 
+                style={styles.input}
+                onChangeText={( text ) => setLoginUser({...loginUser, email: text})}
+                value={loginUser.email}
+                placeholder="Email"
+            />
+
+            <TextInput 
+                style={styles.input}
+                onChangeText={( text ) => setLoginUser({...loginUser, password: text})}
+                secureTextEntry
+                value={loginUser.password}
+                placeholder="Password"
+            />
+
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 24,
+        marginBottom: 16,
+        textAlign: "center"
+    },
+    input: {
+        height: 40,
+        width: 300,
+        borderWidth: 1,
+        marginBottom: 16,
+        padding: 0
+    },
+    button: {
+        backgroundColor: "blue",
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 16
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 16,
+        textAlign: "center"
+    }
+});
