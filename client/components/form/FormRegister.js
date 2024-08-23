@@ -72,11 +72,13 @@ const styles = StyleSheet.create({
         height: 40,
         width: 300,
         borderWidth: 1,
+        borderRadius: 10,
         marginBottom: 16,
+        paddingLeft: 10,
         padding: 0
     },
     button: {
-        backgroundColor: "blue",
+        backgroundColor: "skyblue",
         padding: 10,
         borderRadius: 5,
         marginBottom: 16

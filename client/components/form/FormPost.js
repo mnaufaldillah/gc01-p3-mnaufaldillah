@@ -45,7 +45,7 @@ export default function FormPost() {
             />
 
             <TouchableOpacity style={styles.button} onPress={handlerAddPost}>
-                <Text style={styles.buttonText}>Register</Text>
+                <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </View>
     )
@@ -60,20 +60,24 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         width: "100%",
+        borderRadius: 10,
         borderWidth: 1,
         marginBottom: 16,
+        paddingLeft: 10,
         padding: 0
     },
     inputPost: {
         height: 80,
         width: "100%",
+        borderRadius: 10,
         borderWidth: 1,
         marginBottom: 16,
+        paddingLeft: 10,
         padding: 0
     },
     button: {
-        width: "50%",
-        backgroundColor: "blue",
+        width: "40%",
+        backgroundColor: "skyblue",
         padding: 10,
         borderRadius: 5,
         marginBottom: 16

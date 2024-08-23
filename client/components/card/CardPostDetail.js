@@ -1,9 +1,9 @@
-import { View, Text, Image, Pressable, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native"
 
 export default function CardPostDetail({ postDetail }) {
     return (
-        <Pressable >
+        <TouchableOpacity >
             <View 
                 // key={postDetail?.id}
                 style={styles.post}
@@ -15,15 +15,12 @@ export default function CardPostDetail({ postDetail }) {
                     Muhammad Naufaldillah
                 </Text>
 
-
                 <Text
                     style={styles.postContent}
                 >
                     lorem ipsum
                     {/* {postDetail?.content} */}
                 </Text>
-
-                
 
                 <Image
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1zojZbURgjQUYrXJ6l-P_HqJNuURVFNGKIA&s"
@@ -40,11 +37,18 @@ export default function CardPostDetail({ postDetail }) {
                 <Text
                     style={styles.postInfo}
                 >
+                    Number of Likes: 4
+                    {/* Tagged in: {postDetail?.tags} */}
+                </Text>
+
+                <Text
+                    style={styles.postInfo}
+                >
                     Created At: 2024/04/04 
                     {/* Created At: {postDetail?.createdAt} */}
                 </Text>
             </View>
-        </Pressable>
+        </TouchableOpacity>
     )
 }
 

@@ -1,9 +1,18 @@
-import { Text, View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import FormPost from "../components/form/FormPost";
 
 export default function AddPostScreen({ navigation }) {
     return (
-        <View  style={{ flex: 1, alignItems: `center` }}>
-            <Text>Add Post Screen</Text>
+        <View  style={styles.container}>
+            <FormPost />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 16,
+        backgroundColor: "white"
+    }
+});

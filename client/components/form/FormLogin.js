@@ -1,7 +1,7 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormLogin() {
+export default function FormLogin({ navigation }) {
     const [loginUser, setLoginUser]  = useState({
         email: '',
         password: ''
@@ -56,11 +56,13 @@ const styles = StyleSheet.create({
         height: 40,
         width: 300,
         borderWidth: 1,
+        borderRadius: 10,
         marginBottom: 16,
+        paddingLeft: 10,
         padding: 0
     },
     button: {
-        backgroundColor: "blue",
+        backgroundColor: "skyblue",
         padding: 10,
         borderRadius: 5,
         marginBottom: 16

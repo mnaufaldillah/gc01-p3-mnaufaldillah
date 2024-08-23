@@ -1,12 +1,12 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormComment() {
-    const [comment, setComment]  = useState('');
+export default function FormSearchUser() {
+    const [searchUser, setSearchUser]  = useState('');
 
-    async function handleComment() {
+    async function handleSearchUser() {
         try {
-            console.log(comment);
+            console.log(searchUser);
             
         } catch (error) {
             console.log(error);
@@ -18,13 +18,13 @@ export default function FormComment() {
         <View>
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setComment(text)}
-                value={comment}
-                placeholder="Your Comment"
+                onChangeText={( text ) => setSearchUser(text)}
+                value={searchUser}
+                placeholder="Search User"
             />
 
-            <TouchableOpacity style={styles.button} onPress={handleComment}>
-                <Text style={styles.buttonText}>Post Comment</Text>
+            <TouchableOpacity style={styles.button} onPress={handleSearchUser}>
+                <Text style={styles.buttonText}>Search</Text>
             </TouchableOpacity>
         </View>
     )
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
         width: "100%",
         borderWidth: 1,
         borderRadius: 10,
-        marginBottom: 16,
         paddingLeft: 10,
+        marginBottom: 16,
         padding: 0,
     },
     button: {

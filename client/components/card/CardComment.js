@@ -1,9 +1,9 @@
-import { View, Text, Image, Pressable, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native"
 
-export default function CardComment({ postDetail }) {
+export default function CardComment({ commentDetail }) {
     return (
-        <Pressable >
+        <TouchableOpacity >
             <View 
                 // key={postDetail?.id}
                 style={styles.comment}
@@ -14,7 +14,6 @@ export default function CardComment({ postDetail }) {
                     {/* {postDetail?.author?.username} */}
                     Naufal123 commented:
                 </Text>
-
 
                 <Text
                     style={styles.commentContent}
@@ -30,7 +29,7 @@ export default function CardComment({ postDetail }) {
                     {/* Created At: {postDetail?.createdAt} */}
                 </Text>
             </View>
-        </Pressable>
+        </TouchableOpacity>
     )
 }
 
