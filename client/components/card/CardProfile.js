@@ -5,34 +5,32 @@ export default function CardProfile({ profileDetail }) {
     return (
         <TouchableOpacity >
             <View 
-                // key={postDetail?.id}
+                key={profileDetail?._id}
                 style={styles.profile}
             >
                 <Text
                     style={styles.profileContent}
                 >
-                    Naufal123
-                    {/* {postDetail?.content} */}
+                    {profileDetail?.username} 
                 </Text>
 
                 <Text
                     style={styles.profileInfo}
                 >
-                    Muhammad Naufaldillah
+                    {profileDetail?.name}
+                </Text>
+
+                <Text
+                    style={styles.profileInfo}
+                >
+                    Number of Followings: {profileDetail?.followings.length}
                     {/* Created At: {postDetail?.createdAt} */}
                 </Text>
 
                 <Text
                     style={styles.profileInfo}
                 >
-                    Number of Following: 4
-                    {/* Created At: {postDetail?.createdAt} */}
-                </Text>
-
-                <Text
-                    style={styles.profileInfo}
-                >
-                    Number of Followers: 6
+                    Number of Followers: {profileDetail?.followers?.length}
                     {/* Created At: {postDetail?.createdAt} */}
                 </Text>
             </View>

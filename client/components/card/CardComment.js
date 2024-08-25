@@ -2,31 +2,35 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native"
 
 export default function CardComment({ commentDetail }) {
+    function renderTime() {
+        const foundDate = new Date(commentDetail.createdAt * 1);
+        const formattedDate = foundDate.toLocaleDateString("en-US", {weekday: "short", year: "numeric", month: "long", day: "numeric"});
+        const formattedTime = foundDate.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit"})
+
+        return `${formattedDate} ${formattedTime}`;
+    }
+
     return (
         <TouchableOpacity >
             <View 
-                // key={postDetail?.id}
                 style={styles.comment}
             >
                 <Text
                     style={styles.commentInfo}
                 >
-                    {/* {postDetail?.author?.username} */}
-                    Naufal123 commented:
+                    {commentDetail?.username} commented:
                 </Text>
 
                 <Text
                     style={styles.commentContent}
                 >
-                    What A great day!
-                    {/* {postDetail?.content} */}
+                    {commentDetail?.content}
                 </Text>
 
                 <Text
                     style={styles.commentInfo}
                 >
-                    Created At: 2024/04/04 
-                    {/* Created At: {postDetail?.createdAt} */}
+                    Created At: {renderTime()}
                 </Text>
             </View>
         </TouchableOpacity>

@@ -1,13 +1,19 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormSearchUser() {
+export default function FormSearchUser({ refetch }) {
     const [searchUser, setSearchUser]  = useState('');
 
     async function handleSearchUser() {
         try {
-            console.log(searchUser);
+            // console.log(getUser, `<----------`);
+            // console.log(searchUser, `<-----------------`);
             
+            
+            await refetch({
+                inputSearch: searchUser
+            });
+
         } catch (error) {
             console.log(error);
             

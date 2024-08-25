@@ -5,11 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LoginScreen from "../screens/LoginSceen";
 import RegisterScreen from "../screens/RegisterScreen";
 
-import HomeScreen from "../screens/HomeScreen";
-import PostDetailScreen from "../screens/PostDetailScreen";
+
 import AddPostScreen from "../screens/AddPostScreen";
-import SearchUserScreen from "../screens/SearchUserScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import HomeTab from "./HomeTab";
+import SearchTab from "./SearchTab";
 
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import * as SecureStore from "expo-secure-store";
@@ -19,10 +18,8 @@ import { AuthContext } from "../contexts/AuthContext";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
-
 export default function MainStack() {
-    const { isSignedIn, setSignedIn } = useContext(AuthContext);
+    const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -31,7 +28,7 @@ export default function MainStack() {
         SecureStore.getItemAsync(`access_token`)
             .then((token) => {
                 if(token) {
-                    setSignedIn(true)
+                    setIsSignedIn(true)
                 }
             })
             .catch((err) => {
@@ -54,9 +51,9 @@ export default function MainStack() {
         <NavigationContainer>
             {isSignedIn ? (
                 <Tab.Navigator >
-                    <Tab.Screen name="home" component={HomeScreen}/>
+                    <Tab.Screen name="homeTab" component={HomeTab} options={{ headerShown: false }}/>
                     <Tab.Screen name="addPost" component={AddPostScreen} />
-                    <Tab.Screen name="searchUser" component={SearchUserScreen} />
+                    <Tab.Screen name="searchTab" component={SearchTab} options={{ headerShown: false }}/>
                 </Tab.Navigator>
             ) : (
                 <Stack.Navigator >

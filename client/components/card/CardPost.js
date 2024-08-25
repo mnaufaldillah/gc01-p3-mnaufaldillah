@@ -4,43 +4,73 @@ import { useNavigation } from "@react-navigation/native"
 export default function CardPost({ postDetail }) {
     const navigation = useNavigation();
 
+    function renderImage() {
+        if(postDetail.imgUrl) {
+            return (
+                <Image
+                    src={postDetail.imgUrl}
+                    style={styles.postImage}
+                />
+            )
+        } else {
+            return null
+        }
+    }
+
+    function renderTags() {
+        let textOutput = ``
+        
+        for(let i = 1; i <= postDetail.tags.length; i++ ) {
+            if(i === postDetail.tags.length) {
+                textOutput += `${postDetail.tags[i - 1]}`
+            } else {
+                textOutput += `${postDetail.tags[i - 1]}, `
+            }
+        }
+
+        return textOutput
+    }
+
+    function renderTime() {
+        const foundDate = new Date(postDetail.createdAt * 1);
+        const formattedDate = foundDate.toLocaleDateString("en-US", {weekday: "short", year: "numeric", month: "long", day: "numeric"});
+        const formattedTime = foundDate.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit"})
+
+        return `${formattedDate} ${formattedTime}`;
+    }
+
     return (
-        <TouchableOpacity >
+        <TouchableOpacity onPress={() => {
+            navigation.navigate("detailPost", {postDetail});
+        }}>
             <View 
-                // key={postDetail?.id}
+                key={postDetail?._id}
                 style={styles.post}
             >
                 <Text
                     style={styles.postInfo}
                 >
-                    {/* {postDetail?.author?.username} */}
-                    Muhammad Naufaldillah
+                    {postDetail?.author?.username}
                 </Text>
 
                 <Text
                     style={styles.postContent}
                 >
-                    lorem ipsum
-                    {/* {postDetail?.content} */}
+                    {postDetail?.content}
                 </Text>
 
-                <Image
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1zojZbURgjQUYrXJ6l-P_HqJNuURVFNGKIA&s"
-                    style={styles.postImage}
-                />
+                {renderImage()}
 
                 <Text
                     style={styles.postInfo}
                 >
-                    Tagged in : Jaguar
-                    {/* Tagged in: {postDetail?.tags} */}
+                    Tagged in: {renderTags()}
                 </Text>
 
                 <Text
                     style={styles.postInfo}
                 >
-                    Created At: 2024/04/04 
-                    {/* Created At: {postDetail?.createdAt} */}
+                    Created At: {renderTime()}
                 </Text>
             </View>
         </TouchableOpacity>

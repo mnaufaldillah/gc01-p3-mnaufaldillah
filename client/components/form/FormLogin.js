@@ -1,16 +1,37 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../../queries/query";
+
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+
+import * as SecureStore from "expo-secure-store"
+
 export default function FormLogin({ navigation }) {
-    const [loginUser, setLoginUser]  = useState({
+    const { setIsSignedIn } = useContext(AuthContext);
+    const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+
+    const [inputLogin, setInputLogin]  = useState({
         email: '',
         password: ''
     });
 
     async function handleLogin() {
         try {
-            console.log(loginUser);
+            // console.log(`Cat < -------------`);
             
+            const res = await loginUser({
+                variables: {
+                    login: inputLogin
+                }
+            });
+
+            // console.log(res.data?.loginUser?.access_token);
+            await SecureStore.setItemAsync("access_token", res.data.loginUser.access_token);
+            
+            setIsSignedIn(true)
         } catch (error) {
             console.log(error);
         }
@@ -22,16 +43,16 @@ export default function FormLogin({ navigation }) {
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setLoginUser({...loginUser, email: text})}
-                value={loginUser.email}
+                onChangeText={( text ) => setInputLogin({...inputLogin, email: text})}
+                value={inputLogin.email}
                 placeholder="Email"
             />
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setLoginUser({...loginUser, password: text})}
+                onChangeText={( text ) => setInputLogin({...inputLogin, password: text})}
                 secureTextEntry
-                value={loginUser.password}
+                value={inputLogin.password}
                 placeholder="Password"
             />
 
@@ -39,7 +60,7 @@ export default function FormLogin({ navigation }) {
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("register")}>
                 <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
         </View>

@@ -5,16 +5,16 @@ export default function CardSearchUser({ searchUserDetail }) {
     const navigation = useNavigation();
     
     return (
-        <TouchableOpacity >
+        <TouchableOpacity onPress={() => {
+            navigation.navigate("profile", { searchUserDetail })
+        }}>
             <View 
-                // key={postDetail?.id}
                 style={styles.searchUser}
             >
                 <Text
                     style={styles.searchUserContent}
                 >
-                    Naufal123
-                    {/* {postDetail?.content} */}
+                   {searchUserDetail?.username}
                 </Text>
             </View>
         </TouchableOpacity>

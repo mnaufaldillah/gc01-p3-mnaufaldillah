@@ -1,10 +1,13 @@
 import { View, StyleSheet } from "react-native";
 import FormLogin from "../components/form/FormLogin";
+import { useNavigation } from "@react-navigation/native";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
+    const navigation = useNavigation()
+
     return (
         <View  style={styles.container}>
-            <FormLogin />
+            <FormLogin navigation={navigation}/>
             
         </View>
     )

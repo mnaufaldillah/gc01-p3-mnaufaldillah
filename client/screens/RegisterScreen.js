@@ -1,10 +1,13 @@
 import { View, StyleSheet } from "react-native";
 import FormRegister from "../components/form/FormRegister";
+import { useNavigation } from "@react-navigation/native";
 
-export default function RegisterScreen({ navigation }) {
+export default function RegisterScreen({ route }) {
+    const navigation = useNavigation();
+
     return (
         <View  style={styles.container}>
-            <FormRegister />
+            <FormRegister navigation={navigation}/>
         </View>
     )
 }

@@ -1,10 +1,12 @@
 import { View, StyleSheet } from "react-native";
 import FormPost from "../components/form/FormPost";
+import { useNavigation } from "@react-navigation/native";
 
-export default function AddPostScreen({ navigation }) {
+export default function AddPostScreen() {
+    const navigation = useNavigation()
     return (
         <View  style={styles.container}>
-            <FormPost />
+            <FormPost navigation={navigation}/>
         </View>
     )
 }

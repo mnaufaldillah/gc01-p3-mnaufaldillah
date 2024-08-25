@@ -1,17 +1,34 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormPost() {
+import { useMutation } from "@apollo/client";
+import { ADD_POST, GET_POSTS } from "../../queries/query";
+
+export default function FormPost({ navigation }) {
+    const [addPost, { data, loading, error }] = useMutation(ADD_POST, {
+        refetchQueries: [GET_POSTS],
+        onCompleted: () => {
+            navigation.navigate("home");
+        }
+    });
+
     const [newPost, setNewPost]  = useState({
         content: '',
         imgUrl: '',
-        tag: ''
+        tags: ''
     });
 
     async function handlerAddPost() {
         try {
-            setNewPost({...newPost, tag: newPost.tag.split(' ')});
-            console.log(newPost);
+            // setNewPost({...newPost, tag: newPost.tag.split(' ')});
+            newPost.tags = newPost.tags.split(" ");
+            // console.log(newPost);
+
+            await addPost({
+                variables: {
+                    post: newPost
+                }
+            });
         } catch (error) {
             console.log(error);
             
@@ -39,8 +56,8 @@ export default function FormPost() {
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setNewPost({...newPost, tag: text})}
-                value={newPost.tag}
+                onChangeText={( text ) => setNewPost({...newPost, tags: text})}
+                value={newPost.tags}
                 placeholder="Tag maybe?"
             />
 

@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const REGISTER_USER = gql`
     mutation RegisterUser($register: NewRegister) {
-        registerUser(register: $regiter) {
+        registerUser(register: $register) {
             _id
             name
             username
@@ -43,8 +43,8 @@ export const SEARCH_USER = gql`
 `
 
 export const GET_USER = gql`
-    query GetUser($inputSearch: String) {
-        getUser(inputSearch: $inputSearch) {
+    query GetUser($userId: ID) {
+        getUser(userId: $userId) {
             _id
             name
             username
@@ -173,7 +173,7 @@ export const LIKE_POST = gql`
     }
 `
 
-export const Follow_User = gql`
+export const FOLLOW_USER = gql`
     mutation FollowUser($follow: NewFollow) {
         followUser(follow: $follow) {
             _id

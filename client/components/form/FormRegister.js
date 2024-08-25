@@ -1,18 +1,33 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormRegister() {
-    const [registerUser, setRegisterUser]  = useState({
+import { useMutation } from "@apollo/client";
+import { REGISTER_USER } from "../../queries/query";
+
+
+export default function FormRegister({ navigation }) {
+    const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER);
+
+    const [inputRegister, setInputRegister]  = useState({
         name: '',
         username: '',
         email: '',
         password: ''
     });
 
+
+
     async function handleRegister() {
         try {
-            console.log(registerUser);
+            // console.log(`Cat < -------------`);
             
+            await registerUser({
+                variables: {
+                    register: inputRegister
+                }
+            });
+
+            navigation.navigate("login");
         } catch (error) {
             console.log(error);
         }
@@ -24,30 +39,30 @@ export default function FormRegister() {
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, name: text})}
-                value={registerUser.name}
+                onChangeText={( text ) => setInputRegister({...inputRegister, name: text})}
+                value={inputRegister.name}
                 placeholder="Full name"
             />
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, username: text})}
-                value={registerUser.username}
+                onChangeText={( text ) => setInputRegister({...inputRegister, username: text})}
+                value={inputRegister.username}
                 placeholder="Username"
             />
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, email: text})}
-                value={registerUser.email}
+                onChangeText={( text ) => setInputRegister({...inputRegister, email: text})}
+                value={inputRegister.email}
                 placeholder="Email"
             />
 
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setRegisterUser({...registerUser, password: text})}
+                onChangeText={( text ) => setInputRegister({...inputRegister, password: text})}
                 secureTextEntry
-                value={registerUser.password}
+                value={inputRegister.password}
                 placeholder="Password"
             />
 
@@ -55,7 +70,7 @@ export default function FormRegister() {
                 <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("login")}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
         </View>

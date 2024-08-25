@@ -1,12 +1,30 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from "react";
 
-export default function FormComment() {
-    const [comment, setComment]  = useState('');
+import { useMutation } from "@apollo/client";
+import { COMMENT_POST, GET_POST_BY_ID, GET_POSTS } from "../../queries/query";
+
+export default function FormComment({ postId }) {
+    // console.log(postId, `<-------------- POST ID`);
+    const [commentPost, { data, loading, error }] = useMutation(COMMENT_POST, {
+        refetchQueries: [GET_POST_BY_ID]
+    });
+    
+    const [inputComment, setInputComment]  = useState('');
 
     async function handleComment() {
         try {
-            console.log(comment);
+            // console.log(comment);
+            const newComment = {
+                content: inputComment,
+                postId
+            }
+
+            await commentPost({
+                variables: {
+                    comment: newComment
+                }
+            })
             
         } catch (error) {
             console.log(error);
@@ -18,8 +36,8 @@ export default function FormComment() {
         <View>
             <TextInput 
                 style={styles.input}
-                onChangeText={( text ) => setComment(text)}
-                value={comment}
+                onChangeText={( text ) => setInputComment(text)}
+                value={inputComment}
                 placeholder="Your Comment"
             />
 
