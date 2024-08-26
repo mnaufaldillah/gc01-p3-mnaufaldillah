@@ -20,7 +20,7 @@ const followTypeDefs = require(`./schema/follow.js`);
 const server = new ApolloServer({
     typeDefs: [userTypeDefs, postTypeDefs, followTypeDefs],
     resolvers: [userResolvers, postResolvers, followResolvers],
-    introspection: true
+    introspection: true,
 });
 
 (async () => {
